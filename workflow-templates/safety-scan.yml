@@ -1,0 +1,21 @@
+name: Safety Dependency Scan
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  dependency-check:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Run Safety GitHub Action
+      uses: pyupio/safety-action@v1
+      with:
+        api-key: ${{ secrets.JUSTIN_SAFETY_API_KEY }}
